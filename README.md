@@ -3,6 +3,6 @@
 
 
 
-> [ENDPOINT (To)]
+> [ENDPOINT : To ]
 
-> [ENDPOINT (From)]
+> [ENDPOINT : From ]
