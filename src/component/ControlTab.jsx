@@ -1,17 +1,21 @@
 import * as React from 'react';
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import ButtonGroup from '@mui/material/ButtonGroup';
+import FormGroup from '@mui/material/FormGroup';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Switch from '@mui/material/Switch';
+
 
 export default function BasicButtons() {
   return (
-    <ButtonGroup variant="contained" aria-label="outlined primary button group">
-      <Button variant="contained">에어컨</Button>
-      <Button variant="contained">보일러</Button>
-      <Button variant="contained">제습기</Button>
-      <Button variant="contained">가습기</Button>
-      <Button variant="contained">공기청정기</Button>
-      <Button variant="contained">실외기</Button>
-    </ButtonGroup>
+      <FormGroup 
+        row 
+        sx={{ml:10}}
+      >
+        <FormControlLabel control={<Switch defaultChecked />} label="에어컨" sx={{color : 'text.primary'}}/>
+        <FormControlLabel control={<Switch defaultChecked />} label="보일러" sx={{color : 'text.primary'}}/>
+        <FormControlLabel control={<Switch defaultChecked />} label="가습기" sx={{color : 'text.primary'}}/>
+        <FormControlLabel control={<Switch defaultChecked />} label="제습기" sx={{color : 'text.primary'}}/>
+        <FormControlLabel control={<Switch defaultChecked />} label="공기청정기" sx={{color : 'text.primary'}}/>
+        <FormControlLabel control={<Switch defaultChecked />} label="실외기" sx={{color : 'text.primary'}}/>
+      </FormGroup>
   );
 }
