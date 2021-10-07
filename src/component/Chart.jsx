@@ -11,7 +11,7 @@ minutes = minutes.length===1? '0'+minutes:minutes;
 let seconds = today.getSeconds().toString();
 seconds = seconds.length===1? '0'+seconds:seconds;
 console.log(hours,minutes,seconds)
-let nowTime=hours+minutes+ seconds
+let nowTime=hours+":"+minutes+":"+ seconds
 const dummyData = [
         {
             "id": "Co2",
@@ -58,13 +58,22 @@ export const LineChart = ({data}) => {
         setDatas(dummyData)
         console.log("[Data in chart]",data)
         if(data.Time){
-            const chartTime = data.Time.substring(8)
-            const tmpCo2Data = {"id": "Co2","data":[...datas[0].data, {"x" :chartTime,"y": parseInt(data.Co2)}]}
-            const tmpHumidData = {"id": "Humid","data":[...datas[1].data, {"x" :chartTime,"y": parseInt(data.Humid)}]}
-            const tmpTempData = {"id": "Temp","data":[...datas[2].data, {"x" :chartTime,"y": parseInt(data.Temp)}]}
-            const tmpPM10Data = {"id": "PM10","data":[...datas[3].data,{"x" :chartTime,"y": data.PM10}]}
-            const tmpPM25Data = {"id": "PM25","data":[...datas[4].data,{"x" :chartTime,"y": data.PM25}]}
-            const chartData = [tmpCo2Data,tmpHumidData,tmpTempData,tmpTempData,tmpPM10Data,tmpPM25Data]
+            const [h1,h2,m1,m2,s1,s2] = data.Time.substring(8)
+            const chartTime = h1+h2+":"+m1+m2+":"+s1+s2
+            const cutNum = 10
+            const tmpCo2inChart = datas[0].data.length >= cutNum ?  datas[0].data.slice(datas[0].data.length-cutNum):datas[0].data
+            const tmpHumidinChart = datas[1].data.length >= cutNum ?  datas[1].data.slice(datas[1].data.length-cutNum):datas[1].data
+            const tmpTempinChart = datas[2].data.length >= cutNum ?  datas[2].data.slice(datas[2].data.length-cutNum):datas[2].data
+            const tmpPM10inChart = datas[3].data.length >= cutNum ?  datas[3].data.slice(datas[3].data.length-cutNum):datas[3].data
+            const tmpPM25inChart = datas[4].data.length >= cutNum ?  datas[4].data.slice(datas[4].data.length-cutNum):datas[4].data
+
+            console.log("[Cut Data] : ",tmpCo2inChart)
+            const tmpCo2Data = {"id": "Co2","data":[...tmpCo2inChart, {"x" :chartTime,"y": parseInt(data.Co2)}]}
+            const tmpHumidData = {"id": "Humid","data":[...tmpHumidinChart, {"x" :chartTime,"y": parseInt(data.Humid)}]}
+            const tmpTempData = {"id": "Temp","data":[...tmpTempinChart, {"x" :chartTime,"y": parseInt(data.Temp)}]}
+            const tmpPM10Data = {"id": "PM10","data":[...tmpPM10inChart,{"x" :chartTime,"y": data.PM10}]}
+            const tmpPM25Data = {"id": "PM25","data":[...tmpPM25inChart,{"x" :chartTime,"y": data.PM25}]}
+            const chartData = [tmpCo2Data,tmpHumidData,tmpTempData,tmpPM10Data,tmpPM25Data]
             console.log("[Final Chart]",chartData)
             setDatas(chartData)
         }

@@ -1,13 +1,13 @@
 import Fab from '@mui/material/Fab';
-import * as React from 'react';
+import React,{useState,useEffect} from 'react';
 import EditIcon from '@mui/icons-material/Edit';
 import Popover from '@mui/material/Popover';
 import Typography from '@mui/material/Typography';
 import Slider from './Slider'
 
-export default function FloatingActionPopover() {
+export default function FloatingActionPopover({room,init}) {
     const [anchorEl, setAnchorEl] = React.useState(null);
-
+    
     const handleClick = (event) => {
       setAnchorEl(event.currentTarget);
     };
@@ -15,6 +15,12 @@ export default function FloatingActionPopover() {
     const handleClose = () => {
       setAnchorEl(null);
     };
+
+    useEffect(()=>{
+      console.log("room",room)
+      console.log("room",init)
+
+    },[room,init])
   
     const open = Boolean(anchorEl);
     const id = open ? 'simple-popover' : undefined;
@@ -46,8 +52,8 @@ export default function FloatingActionPopover() {
                 }}
             >
             <Typography sx={{ p: 5 }}>
-                <Slider/>
-                <Slider/>
+                <Slider mark={"°C"} room={room} init={init.initTemp}/>
+                <Slider mark={"%"} room={room} init={init.initHumid}/>
             </Typography>
         </Popover>
       </>
