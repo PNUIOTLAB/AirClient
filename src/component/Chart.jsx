@@ -52,10 +52,15 @@ const dummyData = [
     ]
 
 export const LineChart = ({data}) => {
-    const [datas, setDatas] = useState([])
+    const [datas, setDatas] = useState(dummyData)
+
+    // useEffect(()=>{
+    //     setDatas(dummyData)
+    //     console.log("Datas init",datas)
+    // },[])
 
     useEffect(()=>{
-        setDatas(dummyData)
+        // setDatas(dummyData)
         console.log("[Data in chart]",data)
         if(data.Time){
             const [h1,h2,m1,m2,s1,s2] = data.Time.substring(8)

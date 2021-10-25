@@ -109,6 +109,9 @@ export default function VerticalTab() {
     },[items])
 
     useEffect(()=>{
+        console.log("[101]",item101)
+        console.log("[102]",item102)
+
         if (value===0&&item101.StandTemp){
             setInitTemp(item101.StandTemp)
             setInitHumid(item101.StandHumid)
@@ -119,7 +122,9 @@ export default function VerticalTab() {
         if (value===1&&item102.StandTemp){
             setInitTemp(item102.StandTemp)
             setInitHumid(item102.StandHumid)
-            if(item102.Fire)setOpenRoom102Fire(true)
+            if(item102.Fire){
+                setOpenRoom102Fire(true)
+            }
         }
     },[value,item101,item102])
 
@@ -174,14 +179,14 @@ export default function VerticalTab() {
                 <LineChart data={item101}/>
             </div>
             <ControlTab room={101} init={item101}/>
-            {/* <Snackbar open={openRoom101Fire} autoHideDuration={6000} onClose={handleRoom101Close}>
+            <Snackbar open={openRoom101Fire} autoHideDuration={6000} onClose={handleRoom101Close}>
                 <Alert onClose={handleRoom101Close} severity="warning" sx={{ width: '100%' }}>
                     Room 101에 화재가 발생했습니다!
                 </Alert>
-            </Snackbar> */}
+            </Snackbar>
         </TabPanel>
         <TabPanel value={value} index={1}>
-            {/* <div style={{height:'400px', width:'850px'}}>
+            <div style={{height:'400px', width:'850px'}}>
                 <LineChart data={item102}/>
             </div>
             <ControlTab room={102} init={item102}/>
@@ -189,7 +194,7 @@ export default function VerticalTab() {
                 <Alert onClose={handleRoom102Close} severity="warning" sx={{ width: '100%' }}>
                     Room 102에 화재가 발생했습니다!
                 </Alert>
-            </Snackbar> */}
+            </Snackbar>
         </TabPanel>
         <FloatPopover room={value+101} init={{"initTemp":parseInt(initTemp),"initHumid":parseInt(initHumid)}}/>
     </Box>
